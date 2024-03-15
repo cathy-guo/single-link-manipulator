@@ -1,0 +1,11 @@
+function [theta_d, theta_dd_d, rho_d, rho_dot_d] = sin_ref_signal(t)
+
+    % Define the desired output rho
+    theta_d = sin(t);
+
+    % Find the corresponding desired angular acceleration
+    theta_dd_d = -sin(t);
+    rho_d = L * theta_d;
+    rho_dot_d = L * cos(t);
+    
+end
