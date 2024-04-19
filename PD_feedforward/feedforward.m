@@ -1,7 +1,8 @@
-function U = feedforward(ref, I, Kp, Kd, X, C_hat)
+function U = feedforward(ref, I_beam, Kp, Kd, X, C_hat)
 % Returns the control input for a feedforward + PD feedback control scheme
-    n = size(C_hat, 2);
-    rho_mu = C_hat*X(1:n);
-    rho_mu_dot = C_hat*X(n+1:2*n);
-    U = I*ref.theta_dd - Kp*(rho_mu - ref.rho) - Kd*(rho_mu_dot-ref.rho_dot);
+
+    rho_mu = [Kp*C_hat, Kd*C_hat]*X
+    
+    U = I_beam*ref.theta_dd - rho_mu + Kp*ref.rho + Kd*ref.rho_dot;
+
 end
