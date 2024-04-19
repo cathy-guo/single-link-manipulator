@@ -77,5 +77,4 @@ Cc = [C_hat, zeros(1,n)];
 
 % Step response
 sys_ss = ss(Ac, Bc, Cc, D);
-
 step(sys_ss);
