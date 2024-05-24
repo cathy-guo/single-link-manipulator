@@ -1,0 +1,20 @@
+function ref = quintic_ref_signal(t, L)
+
+    % Define waypoints
+    xx = [0, 10:1:20];
+    yy = [0, pi/2*ones(1,11)];
+
+    % Get spline and desired rho + corresponding theta
+    pp = spline(xx, yy);
+    ref.rho_d = L * ppval(pp, t);
+    ref.theta = ppval(pp, t);
+
+    % Find the corresponding desired angular acceleration
+    ref.theta_d_dd = fnder(pp,2);
+
+    ref.theta_d_dd = -sin(t);
+    ref.rho_d = L * ref.theta;
+    ref.rho_d_dot = L * cos(t);
+    ref.rho_d_dd = L * ref.theta_d_dd;
+    
+end

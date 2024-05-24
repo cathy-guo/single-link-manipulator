@@ -1,0 +1,21 @@
+function ref = sin_ref_signal_up(t_array, L)
+    for i = 1:length(t_array)
+        t = t_array(i);
+        if t<(5*pi)
+            % Define the desired output
+            ref.theta(end+1) = - cos(t/5) + 1;
+        
+            % Find the corresponding desired angular acceleration
+            ref.theta_d_dd(end+1) = 1/25 * cos(t/5);
+            ref.rho_d(end+1) = L * ref.theta;
+            ref.rho_d_dot(end+1) = L/5 * sin(t/5);
+            ref.rho_d_dd = L * ref.theta_d_dd;
+        else
+            ref.theta = 2;
+            ref.theta_d_dd = 0;
+            ref.rho_d = L * ref.theta;
+            ref.rho_d_dot = 0;
+            ref.rho_d_dd = 0;
+        end
+    end
+end
